@@ -7,19 +7,18 @@ ServerSock.bind(('',9999))
 ServerSock.listen(5)
 (NewClientSock, addr) = ServerSock.accept()
 
-while(True):
-        ClientMessage = NewClientSock.recv(1024)
-        if ClientMessage != '':
-                print(ClientMessage)
-                CM_json = json.loads(ClientMessage)
-                NewClientSock.send('successful'.encode())
-				        for a in CM_json:
-                    db = MySQLdb.connect(host="localhost",user="root", passwd="12345678", db="members", charset="utf8")
-                    cursor = db.cursor()
-                    sql = "INSERT INTO data1 (member) VALUES(%s);"
-                    new_data = (a)
-                    cursor.execute(sql, new_data)
-				            db.commit()
-                    db.close()
+ClientMessage = NewClientSock.recv(1024)
+if ClientMessage != '':
+    print(ClientMessage)
+    CM_json = json.loads(ClientMessage)
+    NewClientSock.send('successful'.encode())
+	  for a in CM_json:
+        db = MySQLdb.connect(host="localhost",user="root", passwd="12345678", db="members", charset="utf8")
+        cursor = db.cursor()
+        sql = "INSERT INTO data1 (member) VALUES(%s);"
+        new_data = (a)
+        cursor.execute(sql, new_data)
+		    db.commit()
+        db.close()
 				
 NewClientSock.close()
