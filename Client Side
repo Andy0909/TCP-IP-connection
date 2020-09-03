@@ -1,0 +1,12 @@
+import socket
+import json
+
+ClientSock=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+ClientSock.connect(('35.231.251.115', 9999))
+
+names = ['Andy','May','Terry']
+data = json.dumps(names)
+ClientSock.send(data)
+ServerMessage = ClientSock.recv(1024)
+print (ServerMessage)
+
