@@ -12,7 +12,7 @@ if ClientMessage != '':
     print(ClientMessage)
     CM_json = json.loads(ClientMessage)
     NewClientSock.send('successful'.encode())
-	for a in CM_json:
+    for a in CM_json:
         db = MySQLdb.connect(host="localhost",user="root", passwd="12345678", db="members", charset="utf8")
         cursor = db.cursor()
         sql = "INSERT INTO data1 (member) VALUES(%s);"
